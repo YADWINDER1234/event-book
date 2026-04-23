@@ -228,7 +228,7 @@ function App() {
     setDataNotice('');
     try {
       const demoData = buildDemoData();
-      const theatreData = await fetchJson('/theatre');
+      const theatreData = await fetchJson('/theatre?action=getAll');
       const backendTheatres = theatreData.theatres || [];
 
       const theatreNameMap = new Map();
@@ -263,7 +263,7 @@ function App() {
       }
       setTheatres(theatreList);
 
-      const eventData = await fetchJson('/event');
+      const eventData = await fetchJson('/event?action=getAll');
       const backendEvents = eventData.events || [];
       const eventList = [...backendEvents];
 
@@ -295,19 +295,19 @@ function App() {
         setSeatsByEvent(nextSeatsByEvent);
       }
 
-      const allUsersData = await fetchJson('/user');
+      const allUsersData = await fetchJson('/user?action=getAll');
       const userList = (allUsersData.users || []).map(normalizeUserRole);
       setUsers(userList);
 
       const bookingEndpoint = !activeUser
-        ? '/booking'
+        ? '/booking?action=getAll'
         : activeUser.role === 'ADMIN'
-          ? '/booking'
+          ? '/booking?action=getAll'
           : activeUser.role === 'THEATRE' && activeUser.theatreId
-            ? `/booking?theatreId=${activeUser.theatreId}`
+            ? `/booking?action=getAll&theatreId=${activeUser.theatreId}`
             : activeUser.role === 'USER' && activeUser.userId
-              ? `/booking?userId=${activeUser.userId}`
-              : '/booking';
+              ? `/booking?action=getAll&userId=${activeUser.userId}`
+              : '/booking?action=getAll';
 
       const bookingData = await fetchJson(bookingEndpoint);
       const baseBookings = bookingData.bookings || [];
