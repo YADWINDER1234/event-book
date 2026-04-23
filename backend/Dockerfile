@@ -3,8 +3,11 @@ FROM maven:3.9.9-eclipse-temurin-21
 
 WORKDIR /app
 
-# Copy everything into the container
+# Copy entire repo into container
 COPY . .
+
+# Switch into the backend subfolder where pom.xml lives
+WORKDIR /app/backend
 
 # Build the WAR file
 RUN mvn clean package -DskipTests
