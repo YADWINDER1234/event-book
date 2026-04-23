@@ -376,7 +376,7 @@ function App() {
       formData.append('expectedRole', expectedRole);
     }
 
-    const response = await fetch(toApiUrl('/user'), {
+    const response = await fetch(toApiUrl('/user?action=login'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -420,7 +420,7 @@ function App() {
       formData.append('eventId', String(eventId));
       formData.append('seatId', String(seatId));
 
-      await fetchJson('/booking', {
+      await fetchJson('/booking?action=create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -443,7 +443,7 @@ function App() {
       formData.append('bookingId', String(bookingId));
       formData.append('userId', String(currentUser.userId));
 
-      await fetchJson('/booking', {
+      await fetchJson('/booking?action=pay', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -471,7 +471,7 @@ function App() {
       formData.append('bookingId', String(bookingId));
       formData.append('friendName', cleanName);
 
-      await fetchJson('/booking', {
+      await fetchJson('/booking?action=allocate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -497,7 +497,7 @@ function App() {
         formData.append('theatreId', String(theatreId));
       }
 
-      const response = await fetch(toApiUrl('/user'), {
+      const response = await fetch(toApiUrl('/user?action=update'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -529,7 +529,7 @@ function App() {
       formData.append('action', 'deallocate');
       formData.append('bookingId', String(bookingId));
 
-      await fetchJson('/booking', {
+      await fetchJson('/booking?action=deallocate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -560,7 +560,7 @@ function App() {
       formData.append('location', location?.trim() || 'Main Hall');
       formData.append('description', description?.trim() || 'New theatre schedule update');
 
-      await fetchJson('/event', {
+      await fetchJson('/event?action=add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -584,7 +584,7 @@ function App() {
       formData.append('subject', 'Theatre Schedule Update');
       formData.append('message', message);
 
-      const data = await fetchJson('/notification', {
+      const data = await fetchJson('/notification?action=theatre-alert', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
