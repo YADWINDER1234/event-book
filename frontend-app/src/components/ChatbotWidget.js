@@ -144,7 +144,8 @@ export default function ChatbotWidget({ currentUser, theatres = [], events = [],
     }
 
     try {
-      const response = await fetch('/chatbot', {
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "https://event-book-1.onrender.com";
+      const response = await fetch(`${API_BASE_URL}/chatbot?action=ask`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
