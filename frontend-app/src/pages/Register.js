@@ -92,7 +92,8 @@ export default function Register({ theatres = [], threatAreas = [] }) {
       if (selectedRole === 'THEATRE') {
         formData.append('theatreId', String(theatreId));
       }
-      const response = await fetch('/user', {
+      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "https://event-book-1.onrender.com";
+      const response = await fetch(`${API_BASE_URL}/user?action=register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
